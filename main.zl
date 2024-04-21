@@ -1,0 +1,36 @@
+import "std";
+
+const print := std:print;
+
+enum GameState {
+    playing,
+    Xwins,
+    Ywins,
+    Draw
+}
+
+struct TTTGame {
+    [3][3]str Board,
+    str X,
+    str O,
+
+    fn PrintBoard() -> void {
+        for (0..self.Board.len - 1) |i| {
+            const c := self.Board[i];
+            print(`{c[0]}|{c[1]}|{c[2]}`);
+            if (i != 2) { print("-+-+-"); }
+        }
+    }
+
+    fn changeTile(int v, int h, str replacer) -> void {
+        self.Board[v][h] = replacer;
+    }
+
+    fn checkGameWinState() -> GameState {
+        const board := self.Board;
+    }
+}
+
+
+
+

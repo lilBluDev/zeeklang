@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-all  main.ts",
+    "compileWin": "deno compile --allow-all -o $PWD/zeek --target x86_64-pc-windows-msvc consoleRepl/main.ts"
+  },
+  "imports": { "chalk": "npm:chalk@^5.3.0" }
+}
