@@ -1,5 +1,7 @@
 import * as cliffy from "https://deno.land/x/cliffy@v1.0.0-rc.4/command/mod.ts";
-import {existsSync} from "https://deno.land/std@0.223.0/fs/mod.ts";
+import * as fs from "https://deno.land/std@0.223.0/fs/mod.ts";
+// import * as io from "https://deno.land/std@0.223.0/io/mod.ts";
+import * as Path from "https://deno.land/std@0.223.0/path/mod.ts";
 import chalk from "chalk";
 import zeek from "../src/zeek.ts";
 
@@ -8,6 +10,12 @@ const Z = new zeek();
 const AppName = "zeek";
 const AppVersion = "DEV-0";
 
+const GHcodeURL = "https://raw.githubusercontent.com/lilBluDev/zeeklang/main/";
+const examplesURL = GHcodeURL + "examples/";
+
+const templates = new Map<string, string>([
+    ["hw", examplesURL+"hw/"]
+]);
 
 await new cliffy.Command()
     .name(AppName)
@@ -55,7 +63,7 @@ function runCmd(_opts: cliffy.CommandOptions, args: [(string | undefined)?]): vo
     }
 
     //check if file exist
-    if (!existsSync(filePath)) {
+    if (!fs.existsSync(filePath)) {
         console.log("File not found!");
         Deno.exit(1);
     }
@@ -75,9 +83,23 @@ function runCmd(_opts: cliffy.CommandOptions, args: [(string | undefined)?]): vo
     Z.runInput(Deno.realPathSync(filePath), text);
 }
 
-function initCmd(opts: cliffy.CommandOptions, args: [(string | undefined)?]): void {
+async function initCmd(opts: cliffy.CommandOptions, args: [(string | undefined)?]) {
     console.log(opts, args);
     const cwd = Deno.cwd();
+    const t = opts["template"];
+    const template = templates.get(t);
+    if (!template) {
+        console.log("That template does not exist! please choose a nother one!");
+        Deno.exit(0);
+    }
 
-    console.log("< WIP! >");
+    console.log(`Fetching template "${t}" ...`);
+
+    const main = await (await fetch(template+"main.zl")).text();
+    const pkg = await (await fetch(template+"zeek.json")).json();
+    
+    Deno.writeTextFileSync(Path.join(cwd, "main.zl"), main);
+    Deno.writeTextFileSync(Path.join(cwd, "zeek.json"), JSON.stringify(pkg));
+
+    console.log("Done!");
 }

@@ -1,3 +1,3 @@
 import "std:print";
 
-print("Hello, World!")
+print("Hello, World!");
