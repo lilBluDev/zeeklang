@@ -73,7 +73,7 @@ export function registerLus(): void {
     regAtomic(TokenType.AND, BindingPower.logical, expr.parse_binary_expr);
     regAtomic(TokenType.OR, BindingPower.logical, expr.parse_binary_expr);
     regAtomic(TokenType.DOUBLE_DOT, BindingPower.logical, expr.parse_range_expr);
-    // regAtomic(TokenType.CATCH, BindingPower.logical, expr.parse_catch_expr);
+    regAtomic(TokenType.CATCH, BindingPower.logical, expr.parse_catch_expr);
 
     regAtomic(TokenType.PLUS, BindingPower.additive, expr.parse_binary_expr);
     regAtomic(TokenType.MINUS, BindingPower.additive, expr.parse_binary_expr);

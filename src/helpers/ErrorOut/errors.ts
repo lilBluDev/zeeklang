@@ -5,6 +5,10 @@ import chalk from "chalk";
 // [line num]| [line preview]
 //           └── errExplenation
 
+export function BasicNHErr(err: string) {
+    console.log("❗|", err);
+}
+
 export function detailedErr(path: string, line: number, preview: string, col: number, errtype: string, errExplenation: string): void {
     console.log(ConnectedLinePath(path, line, col, errtype));
     console.log(linePreview(line, preview));

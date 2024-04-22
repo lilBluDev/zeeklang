@@ -1,0 +1,5 @@
+import "std/print";
+
+pub fn bar() {
+    print("foo:bar!");
+}

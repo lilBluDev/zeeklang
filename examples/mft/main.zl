@@ -1,0 +1,7 @@
+import "std:print";
+import "./t1/foo.zl";
+
+print("Hello, World!");
+print("Multi File Test!");
+
+foo:bar();
