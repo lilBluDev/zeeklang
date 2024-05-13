@@ -2,6 +2,9 @@
 
 zeek lang is made to be an easy to use interpreted language (and just something im using to learn more about programming langguages)
 
+> ⚠ DEPRECATED <Br>
+> Zeeklang has been deprecated in vafor of a more mature langguage that is currently being worked on!
+
 ## how to use
 
 you can modify the source in the `./main.ts` file and run the source string using `deno task dev`
